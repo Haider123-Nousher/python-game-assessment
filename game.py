@@ -40,14 +40,14 @@ def play_round(secret_number, max_attempts=10):
         guess = ask_for_guess()
 
         if guess == secret_number:
-            print("🎉 Correct! You guessed the number!")
+            print("Correct! You guessed the number.")
             return True
         elif guess < secret_number:
-            print("⬆️ Too low! Try a higher number.")
+            print("Too low. Try a higher number.")
         else:
-            print("⬇️ Too high! Try a lower number.")
+            print("Too high. Try a lower number.")
 
-    print("\n❌ Out of attempts!")
+    print("\nOut of attempts.")
     print(f"The secret number was: {secret_number}")
     return False
 
@@ -73,7 +73,7 @@ def display_summary(player_name, total_games, games_won):
     print(f"Player: {player_name}")
     print(f"Games Played: {total_games}")
     print(f"Games Won: {games_won}")
-    print("Thanks for playing! 👋")
+    print("Thanks for playing. Goodbye.")
 
 
 def main():
@@ -87,7 +87,7 @@ def main():
     total_games = 0
     games_won = 0
 
-    print(f"\nHello, {player_name}! I'm thinking of a number between 1 and 100.")
+    print(f"\nHello, {player_name}. I am thinking of a number between 1 and 100.")
     print("You have 10 attempts to guess it correctly.\n")
 
     while True:
@@ -95,9 +95,9 @@ def main():
 
         if play_round(secret_number):
             games_won += 1
-            print(f"Great job, {player_name}! 🎉")
+            print(f"Well done, {player_name}.")
         else:
-            print(f"Nice try, {player_name}! You'll get it next time.")
+            print(f"Good attempt, {player_name}. Try again next time.")
 
         total_games += 1
 
