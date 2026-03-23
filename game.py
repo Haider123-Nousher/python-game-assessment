@@ -1,11 +1,12 @@
 # I acknowledge the use of ChatGPT (OpenAI) to assist in creating this code.
+# Final refinement for readability and structure
 
 import random
 
 
 def get_player_name():
     """Prompt the player for their name."""
-    name = input("What is your name? ").strip()
+    name = input("Enter your name: ").strip()
     return name if name else "Player"
 
 
@@ -31,10 +32,7 @@ def ask_for_guess():
 
 
 def play_round(secret_number, max_attempts=10):
-    """
-    Play one round of the game.
-    Returns True if the player wins, otherwise False.
-    """
+    """Play one round of the game."""
     for attempt in range(1, max_attempts + 1):
         print(f"\nAttempt {attempt} of {max_attempts}")
         guess = ask_for_guess()
@@ -47,15 +45,15 @@ def play_round(secret_number, max_attempts=10):
         else:
             print("Too high. Try a lower number.")
 
-    print("\nOut of attempts.")
-    print(f"The secret number was: {secret_number}")
+    print("\nNo attempts remaining.")
+    print(f"The correct number was: {secret_number}")
     return False
 
 
 def want_to_play_again():
     """Ask the player if they want to play again."""
     while True:
-        answer = input("\nDo you want to play again? (y/n): ").strip().lower()
+        answer = input("Play again? (y/n): ").strip().lower()
 
         if answer in ("y", "yes"):
             return True
@@ -68,16 +66,16 @@ def want_to_play_again():
 def display_summary(player_name, total_games, games_won):
     """Display final game statistics."""
     print("\n==============================")
-    print("        GAME SUMMARY")
+    print("         GAME SUMMARY")
     print("==============================")
-    print(f"Player: {player_name}")
+    print(f"Player Name : {player_name}")
     print(f"Games Played: {total_games}")
-    print(f"Games Won: {games_won}")
-    print("Thanks for playing. Goodbye.")
+    print(f"Games Won   : {games_won}")
+    print("Thank you for playing.")
 
 
 def main():
-    """Main game function."""
+    """Main function to run the game."""
     print("\n==============================")
     print("     NUMBER GUESSING GAME     ")
     print("==============================\n")
@@ -87,17 +85,18 @@ def main():
     total_games = 0
     games_won = 0
 
-    print(f"\nHello, {player_name}. I am thinking of a number between 1 and 100.")
-    print("You have 10 attempts to guess it correctly.\n")
+    print(f"\nWelcome, {player_name}.")
+    print("Guess the number between 1 and 100.")
+    print("You have 10 attempts.\n")
 
     while True:
         secret_number = random.randint(1, 100)
 
         if play_round(secret_number):
             games_won += 1
-            print(f"Well done, {player_name}.")
+            print(f"Well played, {player_name}.")
         else:
-            print(f"Good attempt, {player_name}. Try again next time.")
+            print(f"Better luck next time, {player_name}.")
 
         total_games += 1
 
