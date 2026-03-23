@@ -1,4 +1,5 @@
 # I acknowledge the use of ChatGPT (OpenAI) to assist in creating this code.
+# GUI improved version for better user experience and clarity
 
 import random
 import tkinter as tk
@@ -10,7 +11,7 @@ class GuessingGameGUI:
 
     def __init__(self, master):
         self.master = master
-        self.master.title("Number Guessing Game")
+        self.master.title("Number Guessing Game - GUI Version")
 
         self.max_attempts = 10
         self.reset_game()
@@ -20,17 +21,17 @@ class GuessingGameGUI:
     def create_widgets(self):
         """Create and layout GUI components."""
 
-        # Title
+        # Title label
         tk.Label(
             self.master,
-            text="Guess the number between 1 and 100!",
+            text="Guess a number between 1 and 100",
             font=("Arial", 14, "bold")
         ).pack(pady=10)
 
         # Attempts label
         self.attempts_label = tk.Label(
             self.master,
-            text=f"Attempts left: {self.max_attempts}",
+            text=f"Attempts remaining: {self.max_attempts}",
             font=("Arial", 11)
         )
         self.attempts_label.pack()
@@ -42,7 +43,7 @@ class GuessingGameGUI:
         # Guess button
         tk.Button(
             self.master,
-            text="Guess",
+            text="Submit Guess",
             font=("Arial", 12),
             command=self.check_guess
         ).pack(pady=5)
@@ -50,7 +51,7 @@ class GuessingGameGUI:
         # Feedback label
         self.feedback = tk.Label(
             self.master,
-            text="",
+            text="Enter your guess to begin",
             font=("Arial", 12)
         )
         self.feedback.pack(pady=10)
@@ -58,7 +59,7 @@ class GuessingGameGUI:
         # Reset button
         tk.Button(
             self.master,
-            text="New Game",
+            text="Start New Game",
             font=("Arial", 12),
             command=self.reset_game_ui
         ).pack(pady=5)
@@ -73,7 +74,7 @@ class GuessingGameGUI:
             return
 
         if not guess_text.isdigit():
-            self.feedback.config(text="Enter a valid whole number.")
+            self.feedback.config(text="Invalid input. Enter a whole number.")
             return
 
         guess = int(guess_text)
@@ -84,25 +85,25 @@ class GuessingGameGUI:
 
         self.attempts += 1
         remaining = self.max_attempts - self.attempts
-        self.attempts_label.config(text=f"Attempts left: {remaining}")
+        self.attempts_label.config(text=f"Attempts remaining: {remaining}")
 
         # Game logic
         if guess == self.secret_number:
-            messagebox.showinfo("🎉 Correct!", "You guessed the number!")
+            messagebox.showinfo("Correct", "You guessed the number correctly.")
             self.reset_game_ui()
 
         elif self.attempts >= self.max_attempts:
             messagebox.showinfo(
-                "❌ Game Over",
-                f"You ran out of attempts.\nThe number was {self.secret_number}."
+                "Game Over",
+                f"No attempts left. The number was {self.secret_number}."
             )
             self.reset_game_ui()
 
         elif guess < self.secret_number:
-            self.feedback.config(text="Too low! Try higher.")
+            self.feedback.config(text="Too low. Try a higher number.")
 
         else:
-            self.feedback.config(text="Too high! Try lower.")
+            self.feedback.config(text="Too high. Try a lower number.")
 
         self.entry.delete(0, tk.END)
 
@@ -114,15 +115,15 @@ class GuessingGameGUI:
     def reset_game_ui(self):
         """Reset both game logic and UI."""
         self.reset_game()
-        self.feedback.config(text="")
+        self.feedback.config(text="Enter your guess to begin")
         self.entry.delete(0, tk.END)
-        self.attempts_label.config(text=f"Attempts left: {self.max_attempts}")
+        self.attempts_label.config(text=f"Attempts remaining: {self.max_attempts}")
 
 
 def main():
     """Run the GUI application."""
     root = tk.Tk()
-    root.geometry("350x250")
+    root.geometry("360x260")
     app = GuessingGameGUI(root)
     root.mainloop()
 
